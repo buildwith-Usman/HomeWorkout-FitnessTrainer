@@ -1,9 +1,6 @@
 package fitnessapp.workout.homeworkout.stretching
 
-import android.content.Context
 import android.content.Intent
-import android.content.pm.PackageManager
-import android.net.ConnectivityManager
 import android.os.Bundle
 import android.util.Log
 import android.view.View
@@ -20,12 +17,9 @@ import fitnessapp.workout.homeworkout.stretching.interfaces.CallbackListener
 import fitnessapp.workout.homeworkout.stretching.interfaces.TopBarClickListener
 import fitnessapp.workout.homeworkout.stretching.objects.HistoryDetailsClass
 import fitnessapp.workout.homeworkout.stretching.objects.HomePlanTableClass
-import fitnessapp.workout.homeworkout.stretching.utils.AdUtils
 import fitnessapp.workout.homeworkout.stretching.utils.Constant
-import fitnessapp.workout.homeworkout.stretching.utils.Debug
 import fitnessapp.workout.homeworkout.stretching.utils.ExitStrategy
 import fitnessapp.workout.homeworkout.stretching.utils.Utils
-import fitnessapp.workout.homeworkout.stretching.viewmodel.AdsIdData
 import kotlin.math.roundToInt
 
 
@@ -36,48 +30,14 @@ class HomeActivity : BaseActivity(), CallbackListener {
     var homePlansAdapter: HomePlansAdapter? = null
     var recentPlan: HomePlanTableClass? = null
     var lastWorkout: HistoryDetailsClass? = null
-    var onClickAd = 1
-    lateinit var adsIdData: AdsIdData
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_home)
-//        RequestConfiguration.Builder().setTestDeviceIds(listOf("9CC18F110F993FBFD4CDC98B82191F4A"))
         Log.e("TAG", "MainActivity:::::::::onCreate::::Main Activity:::  ")
         initTopBar(binding!!.topbar)
         initDrawerMenu(true)
 
         init()
-        adsIdData = AdsIdData()
-        callGetAdsId()
-
-//       subScribeToFirebaseTopic()
-
-        if (Utils.getPref(this, Constant.AD_TYPE_FB_GOOGLE, "") == Constant.AD_GOOGLE) {
-            AdUtils.loadGoogleBannerAd(this, binding!!.llAdView, Constant.BANNER_TYPE)
-            binding!!.llAdViewFacebook.visibility=View.GONE
-            binding!!.llAdView.visibility=View.VISIBLE
-        }
-
-//        if (Utils.getPref(this, Constant.AD_TYPE_FB_GOOGLE, "") == Constant.AD_GOOGLE) {
-//            AdUtils.loadGoogleBannerAd(this, binding!!.llAdView, Constant.BANNER_TYPE)
-//            binding!!.llAdViewFacebook.visibility=View.GONE
-//            binding!!.llAdView.visibility=View.VISIBLE
-//        }else if (Utils.getPref(this, Constant.AD_TYPE_FB_GOOGLE, "") == Constant.AD_FACEBOOK) {
-//            AdUtils.loadFacebookBannerAd(this,binding!!.llAdViewFacebook)
-//            binding!!.llAdViewFacebook.visibility=View.VISIBLE
-//            binding!!.llAdView.visibility=View.GONE
-//        }else{
-//            binding!!.llAdView.visibility=View.GONE
-//            binding!!.llAdViewFacebook.visibility=View.GONE
-//        }
-//
-//        Log.e("TAG", "onCreate:Is Purchase::::::: "+Utils.isPurchased(this) )
-//        if (Utils.isPurchased(this)) {
-//            binding!!.llAdView.visibility=View.GONE
-//            binding!!.llAdViewFacebook.visibility = View.GONE
-//        }
-
     }
 
     private fun subScribeToFirebaseTopic() {
@@ -104,54 +64,6 @@ class HomeActivity : BaseActivity(), CallbackListener {
 //            Log.d("logToast", token)
 //            Toast.makeText(baseContext, token, Toast.LENGTH_SHORT).show()
         })
-    }
-
-
-    fun isNetworkConnected(): Boolean {
-        val cm = getSystemService(Context.CONNECTIVITY_SERVICE) as ConnectivityManager
-        return cm.activeNetworkInfo != null && cm.activeNetworkInfo!!.isConnected
-    }
-
-
-    fun callGetAdsId() {
-        try {
-            if (isNetworkConnected()) {
-                if (Constant.ENABLE_DISABLE == Constant.ENABLE) {
-                    Utils.setPref(this, Constant.AD_TYPE_FB_GOOGLE, Constant.AD_TYPE_FACEBOOK_GOOGLE)
-                    Utils.setPref(this, Constant.FB_BANNER, Constant.FB_BANNER_ID)
-                    Utils.setPref(this, Constant.FB_INTERSTITIAL, Constant.FB_INTERSTITIAL_ID)
-                    Utils.setPref(this, Constant.GOOGLE_BANNER, Constant.GOOGLE_BANNER_ID)
-                    Utils.setPref(this, Constant.GOOGLE_INTERSTITIAL, Constant.GOOGLE_INTERSTITIAL_ID)
-                    Utils.setPref(this, Constant.STATUS_ENABLE_DISABLE, Constant.ENABLE_DISABLE)
-                    setAdAppId(Constant.GOOGLE_ADMOB_APP_ID)
-                } else {
-                    Utils.setPref(this, Constant.STATUS_ENABLE_DISABLE, Constant.ENABLE_DISABLE)
-                }
-            } else {
-//                openInternetDialog(this, true)
-            }
-        } catch (e: Exception) {
-            e.printStackTrace()
-        }
-
-
-    }
-
-
-    private fun setAdAppId(id: String) {
-        try {
-            val ai = packageManager.getApplicationInfo(packageName, PackageManager.GET_META_DATA)
-            val bundle = ai.metaData
-            val myApiKey = bundle.getString("com.google.android.gms.ads.APPLICATION_ID")
-            Debug.e("SplashActivity ==>", "Before Api Key::::: $myApiKey")
-            ai.metaData.putString("com.google.android.gms.ads.APPLICATION_ID", id)
-            val apiKey = bundle.getString("com.google.android.gms.ads.APPLICATION_ID")
-            Debug.e("SplashActivity ==>", "After Api Key:::::: $apiKey")
-        } catch (e: PackageManager.NameNotFoundException) {
-            Debug.e("SplashActivity ==>", "Failed to load meta-data, NameNotFound: " + e.message)
-        } catch (e: NullPointerException) {
-            Debug.e("SplashActivity ==>", "Failed to load meta-data, NullPointer: " + e.message)
-        }
     }
 
 

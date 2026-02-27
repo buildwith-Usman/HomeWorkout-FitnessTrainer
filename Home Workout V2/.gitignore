@@ -1,0 +1,70 @@
+# ============================================================
+# Root .gitignore for Android Project
+# Applies to the entire project. Module-level .gitignore files
+# only contain /build (their sole responsibility).
+# ============================================================
+
+# --- Built application files ---
+*.apk
+*.aab
+*.aar
+*.ap_
+*.dex
+
+# --- Java / Kotlin class files ---
+*.class
+
+# --- Gradle ---
+.gradle/
+build/
+**/build/
+**/buildOutputCleanup/
+
+# --- Local environment config (SDK path, signing info) ---
+local.properties
+
+# --- Android Studio / IntelliJ module files ---
+*.iml
+
+# --- Android Studio captures & profiling ---
+captures/
+*.hprof
+
+# --- External / native build ---
+.externalNativeBuild/
+.cxx/
+
+# --- Signing / Keystore ---
+# Uncomment if you store signing files inside the project:
+# *.jks
+# *.keystore
+# keystore.properties
+
+# --- Google Services config (contains API keys) ---
+# Uncomment for public repos:
+# google-services.json
+
+# --- Log files ---
+*.log
+
+# --- OS generated files ---
+.DS_Store
+Thumbs.db
+
+# --- Lint output ---
+lint/intermediates/
+lint/generated/
+lint/outputs/
+lint/tmp/
+
+# --- Test results ---
+test-results/
+
+# --- Temporary files ---
+tmp/
+*.tmp
+*.bak
+*.swp
+
+# --- ProGuard ---
+proguard/

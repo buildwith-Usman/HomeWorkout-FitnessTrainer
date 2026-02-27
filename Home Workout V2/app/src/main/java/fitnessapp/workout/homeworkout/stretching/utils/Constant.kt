@@ -36,9 +36,7 @@ internal object Constant {
 
     val CHECK_LB_KG = "check_lb_kg"
     val FINISH_ACTIVITY = "finish_activity"
-    val BANNER_TYPE = "BANNER_TYPE"
     val IS_PURCHASE = "is_purchase"
-    val REC_BANNER_TYPE = "REC_BANNER_TYPE"
     val FOLDER_NAME = "Stretching Exercises"
     val CACHE_DIR = ".StretchingExercises/Cache"
     val TMP_DIR = (Environment
@@ -184,16 +182,6 @@ internal object Constant {
 
 
 
-    var AD_TYPE_FB_GOOGLE = "AD_TYPE_FB_GOOGLE"
-    var GOOGLE_BANNER = "GOOGLE_BANNER"
-    var GOOGLE_INTERSTITIAL = "GOOGLE_INTERSTITIAL"
-    var GOOGLE_REWARDED_VIDEO = "GOOGLE_REWARDED_VIDEO"
-
-    var FB_BANNER = "FB_BANNER"
-    var FB_BANNER_RECTANGLE_AD = "FB_BANNER_RECTANGLE_AD"
-    var FB_INTERSTITIAL = "FB_INTERSTITIAL"
-
-
     var EXTRA_REMINDER_ID = "Reminder_ID"
     var SPLASH_SCREEN_COUNT = "splash_screen_count"
     var START_BTN_COUNT = "start_btn_count"
@@ -201,26 +189,6 @@ internal object Constant {
 
 
     var STATUS_ENABLE_DISABLE = "STATUS_ENABLE_DISABLE"
-
-
-    //Test Keys
-    const val GOOGLE_ADMOB_APP_ID = "ca-app-pub-3940256099942544~3347511713"
-    const val GOOGLE_BANNER_ID = "ca-app-pub-3940256099942544/6300978111"
-    const val GOOGLE_INTERSTITIAL_ID = "ca-app-pub-3940256099942544/1033173712"
-
-    //Real Keys
-//    const val GOOGLE_ADMOB_APP_ID = "ca-app-pub-4921234158243313~5286900329"
-//    const val GOOGLE_BANNER_ID = "ca-app-pub-4921234158243313/3973818656"
-//    const val GOOGLE_INTERSTITIAL_ID = "ca-app-pub-4921234158243313/2660736981"
-
-
-    const val FB_BANNER_ID = "IMG_16_9_APP_INSTALL#YOUR_PLACEMENT_ID"
-    const val FB_INTERSTITIAL_ID = "IMG_16_9_APP_INSTALL#YOUR_PLACEMENT_ID"
-
-
-    var AD_FACEBOOK = "facebook"
-    var AD_GOOGLE = "google"
-    val AD_TYPE_FACEBOOK_GOOGLE: String = AD_GOOGLE
 
 
     const val ENABLE = "Enable"

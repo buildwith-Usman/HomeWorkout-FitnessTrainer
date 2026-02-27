@@ -35,7 +35,6 @@ import fitnessapp.workout.homeworkout.R
 import fitnessapp.workout.homeworkout.databinding.*
 import fitnessapp.workout.homeworkout.stretching.adapter.SideMenuAdapter
 import fitnessapp.workout.homeworkout.stretching.db.DataHelper
-import fitnessapp.workout.homeworkout.stretching.interfaces.AdsCallback
 import fitnessapp.workout.homeworkout.stretching.interfaces.CallbackListener
 import fitnessapp.workout.homeworkout.stretching.interfaces.DateEventListener
 import fitnessapp.workout.homeworkout.stretching.interfaces.DialogDismissListener
@@ -74,12 +73,6 @@ open class BaseActivity() : AppCompatActivity() {
         }
 
         dbHelper = DataHelper(this)
-
-        if (Utils.getPref(this, Constant.AD_TYPE_FB_GOOGLE, "") == Constant.AD_GOOGLE) {
-            AdUtils.GooglebeforloadAd(this)
-        } else if (Utils.getPref(this, Constant.AD_TYPE_FB_GOOGLE, "") == Constant.AD_FACEBOOK) {
-            AdUtils.FacebookbeforeloadFullAd(this)
-        }
 
     }
 
@@ -1700,33 +1693,7 @@ open class BaseActivity() : AppCompatActivity() {
 
 
         dialogbinding.llWatchVideo.setOnClickListener {
-            AdUtils.showAdsDialog(mContext)
-            if (Utils.getPref(this, Constant.STATUS_ENABLE_DISABLE, "") == Constant.ENABLE &&
-                Utils.getPref(this, Constant.AD_TYPE_FB_GOOGLE, "") == Constant.AD_GOOGLE
-            ) {
-
-                AdUtils.showInterstitialAdsGoogle(mContext, object : AdsCallback {
-                    override fun startNextScreenAfterAd() {
-                        AdUtils.dismissDialog()
-                        dialog.dismiss()
-                    }
-
-                })
-            } else if (Utils.getPref(this, Constant.STATUS_ENABLE_DISABLE, "") == Constant.ENABLE &&
-                Utils.getPref(this, Constant.AD_TYPE_FB_GOOGLE, "") == Constant.AD_FACEBOOK
-            ) {
-                AdUtils.showInterstitialAdsFacebook(mContext, object : AdsCallback {
-                    override fun startNextScreenAfterAd() {
-                        AdUtils.dismissDialog()
-                        dialog.dismiss()
-                    }
-
-                })
-
-            } else {
-                AdUtils.dismissDialog()
-                dialog.dismiss()
-            }
+            dialog.dismiss()
         }
 
         val width = resources.displayMetrics.widthPixels

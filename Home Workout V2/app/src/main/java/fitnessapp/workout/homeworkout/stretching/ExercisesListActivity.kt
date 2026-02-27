@@ -17,18 +17,16 @@ import com.google.gson.reflect.TypeToken
 import fitnessapp.workout.homeworkout.R
 import fitnessapp.workout.homeworkout.databinding.ActivityExerciseListBinding
 import fitnessapp.workout.homeworkout.stretching.adapter.WorkoutListAdapter
-import fitnessapp.workout.homeworkout.stretching.interfaces.AdsCallback
 import fitnessapp.workout.homeworkout.stretching.interfaces.CallbackListener
 import fitnessapp.workout.homeworkout.stretching.objects.HomePlanTableClass
 import fitnessapp.workout.homeworkout.stretching.objects.MyTrainingCatExTableClass
 import fitnessapp.workout.homeworkout.stretching.objects.MyTrainingCategoryTableClass
-import fitnessapp.workout.homeworkout.stretching.utils.AdUtils
 import fitnessapp.workout.homeworkout.stretching.utils.Constant
 import fitnessapp.workout.homeworkout.stretching.utils.Utils
 import java.util.*
 
 
-class ExercisesListActivity : BaseActivity(), CallbackListener, AdsCallback {
+class ExercisesListActivity : BaseActivity(), CallbackListener {
 
     var binding: ActivityExerciseListBinding? = null
     var workoutListAdapter: WorkoutListAdapter? = null
@@ -114,38 +112,8 @@ class ExercisesListActivity : BaseActivity(), CallbackListener, AdsCallback {
 
 
 
-//        Utils.videoURIList.add
-//        AdUtils.loadBannerAd(binding!!.adView,this)
-//        AdUtils.loadBannerGoogleAd(this,binding!!.llAdView,Constant.BANNER_TYPE)
-//        showUnlockTrainingDialog(this)
-
-//        if (Utils.getPref(this, Constant.AD_TYPE_FB_GOOGLE, "") == Constant.AD_GOOGLE) {
-//            AdUtils.loadGoogleBannerAd(this, binding!!.llAdView, Constant.BANNER_TYPE)
-//            binding!!.llAdViewFacebook.visibility=View.GONE
-//            binding!!.llAdView.visibility=View.VISIBLE
-//        }else if (Utils.getPref(this, Constant.AD_TYPE_FB_GOOGLE, "") == Constant.AD_FACEBOOK) {
-//            AdUtils.loadFacebookBannerAd(this,binding!!.llAdViewFacebook)
-//            binding!!.llAdViewFacebook.visibility=View.VISIBLE
-//            binding!!.llAdView.visibility=View.GONE
-//        }else{
-//            binding!!.llAdView.visibility=View.GONE
-//            binding!!.llAdViewFacebook.visibility=View.GONE
-//        }
-//
-//        if (Utils.isPurchased(this)) {
-//            binding!!.llAdView.visibility=View.GONE
-//            binding!!.llAdViewFacebook.visibility = View.GONE
-//        }
-
         initIntentParam()
         init()
-
-
-//        if (Utils.getPref(this,Constant.AD_TYPE_FB_GOOGLE,"") == Constant.AD_GOOGLE) {
-//            AdUtils.GooglebeforloadAd(this)
-//        } else if (Utils.getPref(this,Constant.AD_TYPE_FB_GOOGLE,"") == Constant.AD_FACEBOOK) {
-//            AdUtils.FacebookbeforeloadFullAd(this)
-//        }
     }
 
     private fun initIntentParam() {
@@ -318,7 +286,6 @@ class ExercisesListActivity : BaseActivity(), CallbackListener, AdsCallback {
         super.onResume()
     }
 
-    var adClickCount: Int = 1
     inner class ClickHandler {
 
         fun onEditWorkoutsClick() {
@@ -328,49 +295,7 @@ class ExercisesListActivity : BaseActivity(), CallbackListener, AdsCallback {
         }
 
         fun onStartClick() {
-
-            if (isCheck){
-                startExerciseActivity()
-            }else {
-                if (Utils.getPref(this@ExercisesListActivity, Constant.START_BTN_COUNT, 1) == 1) {
-                    if (Utils.getPref(
-                            this@ExercisesListActivity,
-                            Constant.STATUS_ENABLE_DISABLE,
-                            ""
-                        ) == Constant.ENABLE
-                    ) {
-                        when (Utils.getPref(
-                            this@ExercisesListActivity,
-                            Constant.AD_TYPE_FB_GOOGLE,
-                            ""
-                        )) {
-                            Constant.AD_GOOGLE -> {
-                                AdUtils.showInterstitialAdsGoogle(
-                                    this@ExercisesListActivity,
-                                    this@ExercisesListActivity
-                                )
-                            }
-                            Constant.AD_FACEBOOK -> {
-                                AdUtils.showInterstitialAdsFacebook(
-                                    this@ExercisesListActivity,
-                                    this@ExercisesListActivity
-                                )
-                            }
-                            else -> {
-                                startExerciseActivity()
-                            }
-                        }
-                        Utils.setPref(this@ExercisesListActivity, Constant.START_BTN_COUNT, 0)
-                    } else {
-                        startExerciseActivity()
-                    }
-                } else {
-                    if (adClickCount == 1) {
-                        Utils.setPref(this@ExercisesListActivity, Constant.START_BTN_COUNT, 1)
-                    }
-                    startExerciseActivity()
-                }
-            }
+            startExerciseActivity()
         }
 
         fun onIntroductionClick() {
@@ -428,10 +353,6 @@ class ExercisesListActivity : BaseActivity(), CallbackListener, AdsCallback {
 
     override fun onRetry() {
 
-    }
-
-    override fun startNextScreenAfterAd() {
-        startExerciseActivity()
     }
 
 }

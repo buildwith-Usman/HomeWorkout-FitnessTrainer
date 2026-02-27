@@ -1,12 +1,6 @@
 <resources xmlns:xliff="urn:oasis:names:tc:xliff:document:1.2">
     <string name="app_name">Home Workout</string>
     <string name="youtube_api_key">AIzaSyAoyJpy8xbelBg5uuoAfa_c2E4v262OiSE</string>
-    <!--    Test Admob Id-->
-    <string name="admob_app_id">ca-app-pub-3940256099942544~3347511713</string>
-
-    <!--    Real Admob Id-->
-    <!--    <string name="admob_app_id">ca-app-pub-4921234158243313~5286900329</string>-->
-
 
     <string name="number_picker_formatter">%02d</string>
 

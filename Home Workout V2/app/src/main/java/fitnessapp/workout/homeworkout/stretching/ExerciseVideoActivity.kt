@@ -9,7 +9,6 @@ import com.google.gson.reflect.TypeToken
 import fitnessapp.workout.homeworkout.R
 import fitnessapp.workout.homeworkout.databinding.ActivityExerciesVideoBinding
 import fitnessapp.workout.homeworkout.stretching.objects.HomeExTableClass
-import fitnessapp.workout.homeworkout.stretching.utils.AdUtils
 import fitnessapp.workout.homeworkout.stretching.utils.Constant
 import fitnessapp.workout.homeworkout.stretching.utils.Utils
 import java.lang.Integer.getInteger
@@ -24,28 +23,6 @@ class ExerciseVideoActivity : AppCompatActivity()  {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_exercies_video)
-
-//        AdUtils.loadBannerAd(binding!!.adView,this)
-//        AdUtils.loadBannerGoogleAd(this,binding!!.llAdView, Constant.REC_BANNER_TYPE)
-
-        if (Utils.getPref(this, Constant.AD_TYPE_FB_GOOGLE, "") == Constant.AD_GOOGLE) {
-            AdUtils.loadGoogleBannerAd(this, binding!!.llAdView, Constant.BANNER_TYPE)
-            binding!!.llAdViewFacebook.visibility=View.GONE
-            binding!!.llAdView.visibility=View.VISIBLE
-        }else if (Utils.getPref(this, Constant.AD_TYPE_FB_GOOGLE, "") == Constant.AD_FACEBOOK) {
-            AdUtils.loadFacebookBannerAd(this,binding!!.llAdViewFacebook)
-            binding!!.llAdViewFacebook.visibility=View.VISIBLE
-            binding!!.llAdView.visibility=View.GONE
-        }else{
-            binding!!.llAdView.visibility=View.GONE
-            binding!!.llAdViewFacebook.visibility=View.GONE
-        }
-
-
-        if (Utils.isPurchased(this)) {
-            binding!!.llAdView.visibility=View.GONE
-            binding!!.llAdViewFacebook.visibility = View.GONE
-        }
 
         initIntentParam()
         init()
@@ -147,8 +124,6 @@ class ExerciseVideoActivity : AppCompatActivity()  {
 //            binding!!.youtubeView.visibility = View.VISIBLE
             binding!!.cardVideo.visibility = View.GONE
             binding!!.cardAnimation.visibility = View.VISIBLE
-            binding!!.llAdViewFacebook.visibility=View.GONE
-            binding!!.llAdView.visibility=View.GONE
         }
 
         fun onAnimationClick() {
@@ -156,8 +131,6 @@ class ExerciseVideoActivity : AppCompatActivity()  {
 //            binding!!.youtubeView.visibility = View.GONE
             binding!!.cardVideo.visibility = View.VISIBLE
             binding!!.cardAnimation.visibility = View.GONE
-            binding!!.llAdViewFacebook.visibility=View.VISIBLE
-            binding!!.llAdView.visibility=View.VISIBLE
         }
     }
 

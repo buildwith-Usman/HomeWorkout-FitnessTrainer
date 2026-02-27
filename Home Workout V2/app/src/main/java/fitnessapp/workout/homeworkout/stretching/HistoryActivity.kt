@@ -12,7 +12,6 @@ import fitnessapp.workout.homeworkout.databinding.ActivityHistoryBinding
 import fitnessapp.workout.homeworkout.stretching.adapter.HistoryExpandableAdapter
 import fitnessapp.workout.homeworkout.stretching.interfaces.CallbackListener
 import fitnessapp.workout.homeworkout.stretching.interfaces.TopBarClickListener
-import fitnessapp.workout.homeworkout.stretching.utils.AdUtils
 import fitnessapp.workout.homeworkout.stretching.utils.Constant
 import fitnessapp.workout.homeworkout.stretching.utils.Utils
 import java.text.SimpleDateFormat
@@ -29,33 +28,6 @@ class HistoryActivity : BaseActivity(), CallbackListener {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_history)
 
-//        AdUtils.loadBannerAd(binding!!.adView,this)
-        AdUtils.loadGoogleBannerAd(this,binding!!.llAdView,Constant.BANNER_TYPE)
-
-        if (Utils.getPref(this, Constant.AD_TYPE_FB_GOOGLE, "") == Constant.AD_GOOGLE) {
-            AdUtils.loadGoogleBannerAd(this, binding!!.llAdView, Constant.BANNER_TYPE)
-            binding!!.llAdViewFacebook.visibility=View.GONE
-            binding!!.llAdView.visibility=View.VISIBLE
-        }
-
-//        if (Utils.getPref(this, Constant.AD_TYPE_FB_GOOGLE, "") == Constant.AD_GOOGLE) {
-//            AdUtils.loadGoogleBannerAd(this, binding!!.llAdView, Constant.BANNER_TYPE)
-//            binding!!.llAdViewFacebook.visibility=View.GONE
-//            binding!!.llAdView.visibility=View.VISIBLE
-//        }else if (Utils.getPref(this, Constant.AD_TYPE_FB_GOOGLE, "") == Constant.AD_FACEBOOK) {
-//            AdUtils.loadFacebookBannerAd(this,binding!!.llAdViewFacebook)
-//            binding!!.llAdViewFacebook.visibility=View.VISIBLE
-//            binding!!.llAdView.visibility=View.GONE
-//        }else{
-//            binding!!.llAdView.visibility=View.GONE
-//            binding!!.llAdViewFacebook.visibility=View.GONE
-//        }
-//
-//
-//        if (Utils.isPurchased(this)) {
-//            binding!!.llAdView.visibility=View.GONE
-//            binding!!.llAdViewFacebook.visibility = View.GONE
-//        }
         initIntentParam()
         init()
     }

@@ -19,15 +19,6 @@
         android:background="@color/dark_black_seven_fit"
         android:orientation="vertical">
 
-        <RelativeLayout
-            android:background="@color/dark_black_seven_fit"
-            android:id="@+id/llAdView"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/dp50"
-            android:layout_gravity="center"
-            android:gravity="center"
-            android:visibility="gone" />
-
         <FrameLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content">

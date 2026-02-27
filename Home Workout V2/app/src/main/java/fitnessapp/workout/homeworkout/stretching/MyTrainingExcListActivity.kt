@@ -18,18 +18,16 @@ import fitnessapp.workout.homeworkout.R
 import fitnessapp.workout.homeworkout.databinding.ActivityMyTrainingExcListBinding
 import fitnessapp.workout.homeworkout.stretching.adapter.MyTrainingExcAdapter
 import fitnessapp.workout.homeworkout.stretching.adapter.NewTrainingAdapter
-import fitnessapp.workout.homeworkout.stretching.interfaces.AdsCallback
 import fitnessapp.workout.homeworkout.stretching.interfaces.CallbackListener
 import fitnessapp.workout.homeworkout.stretching.interfaces.TopBarClickListener
 import fitnessapp.workout.homeworkout.stretching.objects.HomePlanTableClass
 import fitnessapp.workout.homeworkout.stretching.objects.MyTrainingCatExTableClass
-import fitnessapp.workout.homeworkout.stretching.utils.AdUtils
 import fitnessapp.workout.homeworkout.stretching.utils.Constant
 import fitnessapp.workout.homeworkout.stretching.utils.Utils
 import java.util.ArrayList
 
 
-class MyTrainingExcListActivity : BaseActivity(), CallbackListener, AdsCallback {
+class MyTrainingExcListActivity : BaseActivity(), CallbackListener {
 
     var binding: ActivityMyTrainingExcListBinding? = null
     var myTrainingExcAdapter: MyTrainingExcAdapter? = null
@@ -154,7 +152,6 @@ class MyTrainingExcListActivity : BaseActivity(), CallbackListener, AdsCallback 
         super.onResume()
     }
 
-    var adClickCount: Int = 1
     inner class ClickHandler {
 
         fun onAddNewClick() {
@@ -164,49 +161,7 @@ class MyTrainingExcListActivity : BaseActivity(), CallbackListener, AdsCallback 
         }
 
         fun onStartClick() {
-
-
-
-            if (Utils.getPref(this@MyTrainingExcListActivity, Constant.START_BTN_COUNT, 1) == 1) {
-                if (Utils.getPref(
-                        this@MyTrainingExcListActivity,
-                        Constant.STATUS_ENABLE_DISABLE,
-                        ""
-                    ) == Constant.ENABLE
-                ) {
-                    when (Utils.getPref(
-                        this@MyTrainingExcListActivity,
-                        Constant.AD_TYPE_FB_GOOGLE,
-                        ""
-                    )) {
-                        Constant.AD_GOOGLE -> {
-                            AdUtils.showInterstitialAdsGoogle(
-                                this@MyTrainingExcListActivity,
-                                this@MyTrainingExcListActivity
-                            )
-                        }
-                        Constant.AD_FACEBOOK -> {
-                            AdUtils.showInterstitialAdsFacebook(
-                                this@MyTrainingExcListActivity,
-                                this@MyTrainingExcListActivity
-                            )
-                        }
-                        else -> {
-                            startExerciseActivity()
-                        }
-                    }
-                    Utils.setPref(this@MyTrainingExcListActivity, Constant.START_BTN_COUNT, 0)
-                } else {
-                    startExerciseActivity()
-                }
-            } else {
-                if (adClickCount == 1) {
-                    Utils.setPref(this@MyTrainingExcListActivity, Constant.START_BTN_COUNT, 1)
-                }
-                startExerciseActivity()
-            }
-
-
+            startExerciseActivity()
         }
 
         fun onEditClick() {
@@ -355,7 +310,4 @@ class MyTrainingExcListActivity : BaseActivity(), CallbackListener, AdsCallback 
 
     }
 
-    override fun startNextScreenAfterAd() {
-        startExerciseActivity()
-    }
 }

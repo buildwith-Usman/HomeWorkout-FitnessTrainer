@@ -72,9 +72,6 @@ dependencies {
     implementation(libs.multitype)
     implementation(libs.preference.ktx)
     implementation(libs.billing.ktx)
-//    implementation(libs.play.services.ads)
-//    implementation(libs.audience.network)
-//    implementation(libs.audience.network.old)
     implementation(libs.work.runtime.ktx)
     implementation ("com.airbnb.android:lottie:3.4.4")
 

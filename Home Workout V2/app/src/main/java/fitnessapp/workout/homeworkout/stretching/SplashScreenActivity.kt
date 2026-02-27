@@ -11,19 +11,15 @@ import fitnessapp.workout.homeworkout.stretching.db.DataHelper
 import fitnessapp.workout.homeworkout.R
 import fitnessapp.workout.homeworkout.stretching.utils.Constant
 import fitnessapp.workout.homeworkout.stretching.utils.Utils
-import fitnessapp.workout.homeworkout.stretching.viewmodel.AdsIdData
-import fitnessapp.workout.homeworkout.stretching.interfaces.AdsCallback
 import fitnessapp.workout.homeworkout.stretching.interfaces.CallbackListener
-import fitnessapp.workout.homeworkout.stretching.utils.AdUtils
 import fitnessapp.workout.homeworkout.stretching.utils.Debug
 import java.util.*
 
 
-class SplashScreenActivity : BaseActivity(), CallbackListener, AdsCallback {
+class SplashScreenActivity : BaseActivity(), CallbackListener {
 
     internal var handler = Handler()
     internal var bindService: Boolean = false
-    lateinit var adsIdData: AdsIdData
     private var billingClient: BillingClient? = null
     val SKU_MONTHLY_SUB = "99monthlysubscription"
     val SKU_YEAR_SUB = "499yearlysubscription"
@@ -32,7 +28,6 @@ class SplashScreenActivity : BaseActivity(), CallbackListener, AdsCallback {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_splash_screen)
-//        adsIdData = AdsIdData()
 
         try {
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
@@ -161,46 +156,6 @@ class SplashScreenActivity : BaseActivity(), CallbackListener, AdsCallback {
             Utils.setPref(this, Constant.IS_FIRST_TIME, true)
             checkPermissions(this)
             Utils.setPref(this, Constant.SPLASH_SCREEN_COUNT, 2)
-        }else{
-            if (Utils.getPref(this, Constant.SPLASH_SCREEN_COUNT, 1) == 1) {
-                Utils.setPref(this, Constant.SPLASH_SCREEN_COUNT, 2)
-               checkPermissions(this)
-            } else {
-                checkAd()
-            }
-        }
-
-    }
-
-    private fun checkAd() {
-        if (Utils.getPref(this, Constant.STATUS_ENABLE_DISABLE, "") == Constant.ENABLE) {
-            Log.e("TAG", "checkAd:L::::IFF:: "+Utils.getPref(this, Constant.AD_TYPE_FB_GOOGLE, ""))
-            if (Utils.getPref(this, Constant.AD_TYPE_FB_GOOGLE, "") == Constant.AD_GOOGLE) {
-                AdUtils.GooglebeforloadAd(this)
-            } else if (Utils.getPref(this, Constant.AD_TYPE_FB_GOOGLE, "") == Constant.AD_FACEBOOK) {
-                AdUtils.FacebookbeforeloadFullAd(this)
-            }
-
-            if (Utils.getPref(this, Constant.STATUS_ENABLE_DISABLE, "") == Constant.ENABLE) {
-                Handler().postDelayed({
-                    when (Utils.getPref(this, Constant.AD_TYPE_FB_GOOGLE, "")) {
-                        Constant.AD_GOOGLE -> {
-                            AdUtils.showInterstitialAdsGoogle(this, this)
-                        }
-                        Constant.AD_FACEBOOK -> {
-                            AdUtils.showInterstitialAdsFacebook(this, this)
-                        }
-                        else -> {
-                            startNextActivity()
-                        }
-                    }
-                    Utils.setPref(this, Constant.SPLASH_SCREEN_COUNT, 1)
-                }, 2000)
-            }else{
-                checkPermissions(this)
-            }
-
-
         } else {
             checkPermissions(this)
         }
@@ -248,10 +203,6 @@ class SplashScreenActivity : BaseActivity(), CallbackListener, AdsCallback {
 
     override fun onRetry() {
 //        networkCheck()
-    }
-
-    override fun startNextScreenAfterAd() {
-        startNextActivity()
     }
 
 }

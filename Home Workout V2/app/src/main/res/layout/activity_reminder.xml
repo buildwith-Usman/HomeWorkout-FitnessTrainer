@@ -100,20 +100,6 @@
             android:src="@drawable/ic_baseline_add_24"
             android:tint="@color/white" />
 
-        <RelativeLayout
-            android:id="@+id/llAdView"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/dp50"
-            android:layout_gravity="center"
-            android:gravity="center"
-            android:visibility="gone" />
-
-        <LinearLayout
-            android:id="@+id/llAdViewFacebook"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/dp50"
-            android:orientation="vertical"
-            android:visibility="gone" />
     </LinearLayout>
 
 </layout>

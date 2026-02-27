@@ -939,22 +939,6 @@
 
         </androidx.core.widget.NestedScrollView>
 
-        <RelativeLayout
-            android:id="@+id/llAdView"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/dp50"
-            android:gravity="center"
-            android:background="@color/dark_black_seven_fit"
-            android:layout_gravity="center"
-            android:visibility="gone"/>
-
-        <LinearLayout
-            android:id="@+id/llAdViewFacebook"
-            android:layout_width="match_parent"
-            android:layout_height="@dimen/dp50"
-            android:background="@color/white"
-            android:orientation="vertical"
-            android:visibility="gone" />
 
     </LinearLayout>
 

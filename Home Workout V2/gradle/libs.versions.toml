@@ -27,9 +27,6 @@ legacy-support-v4 = "1.0.0"
 multitype = "4.2.0"
 preference-ktx = "1.2.1"
 billing = "7.1.1"
-play-services-ads = "22.0.0"
-audience-network = "6.2.1"
-audience-network-old = "6.2.1"
 work-runtime-ktx = "2.10.0"
 
 [libraries]
@@ -59,9 +56,6 @@ number-picker = { module = "io.github.ShawnLin013:number-picker", version.ref = 
 multitype = { module = "com.drakeet.multitype:multitype", version.ref = "multitype" }
 preference-ktx = { module = "androidx.preference:preference-ktx", version.ref = "preference-ktx" }
 billing-ktx = { module = "com.android.billingclient:billing-ktx", version.ref = "billing" }
-play-services-ads = { module = "com.google.android.gms:play-services-ads", version.ref = "play-services-ads" }
-audience-network = { module = "com.facebook.android:audience-network-sdk", version.ref = "audience-network" }
-audience-network-old = { module = "com.facebook.android:audience-network-sdk", version.ref = "audience-network-old" }
 work-runtime-ktx = { module = "androidx.work:work-runtime-ktx", version.ref = "work-runtime-ktx" }
 
 [plugins]

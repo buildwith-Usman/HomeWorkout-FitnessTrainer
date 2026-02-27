@@ -12,7 +12,6 @@ import fitnessapp.workout.homeworkout.R
 import fitnessapp.workout.homeworkout.databinding.ActivityUpdateDayDetailExcTimeBinding
 import fitnessapp.workout.homeworkout.stretching.interfaces.CallbackListener
 import fitnessapp.workout.homeworkout.stretching.objects.HomeExTableClass
-import fitnessapp.workout.homeworkout.stretching.utils.AdUtils
 import fitnessapp.workout.homeworkout.stretching.utils.Constant
 import fitnessapp.workout.homeworkout.stretching.utils.Utils
 
@@ -26,14 +25,6 @@ class UpdateDayDetailExcTime : BaseActivity(), CallbackListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_update_day_detail_exc_time)
-
-        AdUtils.loadGoogleBannerAd(this, binding!!.llAdView, Constant.BANNER_TYPE)
-
-        if (Utils.getPref(this, Constant.AD_TYPE_FB_GOOGLE, "") == Constant.AD_GOOGLE) {
-            AdUtils.loadGoogleBannerAd(this, binding!!.llAdView, Constant.BANNER_TYPE)
-            binding!!.llAdViewFacebook.visibility = View.GONE
-            binding!!.llAdView.visibility = View.VISIBLE
-        }
 
         initIntentParam()
         binding!!.handler = ClickHandler()

@@ -10,7 +10,6 @@ import fitnessapp.workout.homeworkout.databinding.ActivityHealthDataBinding
 import fitnessapp.workout.homeworkout.stretching.interfaces.CallbackListener
 import fitnessapp.workout.homeworkout.stretching.interfaces.DialogDismissListener
 import fitnessapp.workout.homeworkout.stretching.interfaces.TopBarClickListener
-import fitnessapp.workout.homeworkout.stretching.utils.AdUtils
 import fitnessapp.workout.homeworkout.stretching.utils.Constant
 import fitnessapp.workout.homeworkout.stretching.utils.Utils
 
@@ -24,27 +23,6 @@ class HealthDataActivity : BaseActivity(), CallbackListener {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_health_data)
 
-//        AdUtils.loadBannerAd(binding!!.adView,this)
-//        AdUtils.loadBannerGoogleAd(this,binding!!.llAdView,Constant.BANNER_TYPE)
-
-
-        if (Utils.getPref(this, Constant.AD_TYPE_FB_GOOGLE, "") == Constant.AD_GOOGLE) {
-            AdUtils.loadGoogleBannerAd(this, binding!!.llAdView, Constant.BANNER_TYPE)
-            binding!!.llAdViewFacebook.visibility=View.GONE
-            binding!!.llAdView.visibility=View.VISIBLE
-        }else if (Utils.getPref(this, Constant.AD_TYPE_FB_GOOGLE, "") == Constant.AD_FACEBOOK) {
-            AdUtils.loadFacebookBannerAd(this,binding!!.llAdViewFacebook)
-            binding!!.llAdViewFacebook.visibility=View.VISIBLE
-            binding!!.llAdView.visibility=View.GONE
-        }else{
-            binding!!.llAdView.visibility=View.GONE
-            binding!!.llAdViewFacebook.visibility=View.GONE
-        }
-
-        if (Utils.isPurchased(this)) {
-            binding!!.llAdView.visibility=View.GONE
-            binding!!.llAdViewFacebook.visibility = View.GONE
-        }
         initIntentParam()
         init()
     }

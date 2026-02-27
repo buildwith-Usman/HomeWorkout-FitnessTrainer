@@ -26,7 +26,6 @@ import fitnessapp.workout.homeworkout.databinding.BottomSheetSoundOptionBinding
 import fitnessapp.workout.homeworkout.databinding.DialogQuiteWorkoutBinding
 import fitnessapp.workout.homeworkout.stretching.adapter.WorkoutProgressIndicatorAdapter
 import fitnessapp.workout.homeworkout.stretching.db.DataHelper
-import fitnessapp.workout.homeworkout.stretching.interfaces.AdsCallback
 import fitnessapp.workout.homeworkout.stretching.interfaces.CallbackListener
 import fitnessapp.workout.homeworkout.stretching.interfaces.DialogDismissListener
 import fitnessapp.workout.homeworkout.stretching.objects.HomeExTableClass
@@ -61,12 +60,6 @@ class PerformWorkOutActivity : BaseActivity(), CallbackListener {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = DataBindingUtil.setContentView(this, R.layout.activity_perform_workout)
-
-//        if (Utils.getPref(this, Constant.AD_TYPE_FB_GOOGLE, "") == Constant.AD_GOOGLE) {
-//            AdUtils.loadGoogleBannerAd(this, binding!!.llAdView, Constant.BANNER_TYPE)
-////            binding!!.llAdViewFacebook.visibility = View.GONE
-//            binding!!.llAdView.visibility = View.VISIBLE
-//        }
 
         initIntentParam()
         init()
@@ -127,13 +120,6 @@ class PerformWorkOutActivity : BaseActivity(), CallbackListener {
         } else {
 //            binding!!.imgSound.setImageResource(R.drawable.ic_sound_round)
         }
-
-        if (Utils.getPref(this, Constant.AD_TYPE_FB_GOOGLE, "") == Constant.AD_GOOGLE) {
-            AdUtils.GooglebeforloadAd(this)
-        } else if (Utils.getPref(this, Constant.AD_TYPE_FB_GOOGLE, "") == Constant.AD_FACEBOOK) {
-            AdUtils.FacebookbeforeloadFullAd(this)
-        }
-
 
     }
 
@@ -505,43 +491,7 @@ class PerformWorkOutActivity : BaseActivity(), CallbackListener {
     }
 
     private fun goToCompleteScreen() {
-        AdUtils.showAdsDialog(this)
-        Log.e(
-            TAG,
-            "goToCompleteScreen:::: " + Utils.getPref(
-                this,
-                Constant.STATUS_ENABLE_DISABLE,
-                ""
-            ) + "  " +
-                    Utils.getPref(this, Constant.AD_TYPE_FB_GOOGLE, "")
-        )
-        if (Utils.getPref(this, Constant.STATUS_ENABLE_DISABLE, "") == Constant.ENABLE &&
-            Utils.getPref(this, Constant.AD_TYPE_FB_GOOGLE, "") == Constant.AD_GOOGLE
-        ) {
-
-            AdUtils.showInterstitialAdsGoogle(this, object : AdsCallback {
-                override fun startNextScreenAfterAd() {
-                    startCompleteActivity()
-                    AdUtils.dismissDialog()
-                }
-
-            })
-        } else if (Utils.getPref(this, Constant.STATUS_ENABLE_DISABLE, "") == Constant.ENABLE &&
-            Utils.getPref(this, Constant.AD_TYPE_FB_GOOGLE, "") == Constant.AD_FACEBOOK
-        ) {
-            AdUtils.showInterstitialAdsFacebook(this, object : AdsCallback {
-                override fun startNextScreenAfterAd() {
-                    startCompleteActivity()
-                    AdUtils.dismissDialog()
-                }
-
-            })
-        } else {
-            AdUtils.dismissDialog()
-            startCompleteActivity()
-        }
-
-
+        startCompleteActivity()
     }
 
     fun startCompleteActivity() {
@@ -837,7 +787,6 @@ class PerformWorkOutActivity : BaseActivity(), CallbackListener {
     }
 
 
-    var adClickCount: Int = 1
     lateinit var quiteDialog: Dialog
     fun showQuitDialog() {
         MyApplication.speechText(this, getString(R.string.quite_exercise_msg))
@@ -876,39 +825,7 @@ class PerformWorkOutActivity : BaseActivity(), CallbackListener {
         }
 
         dialogQuiteWorkoutBinding.btnQuit.setOnClickListener {
-            if (Utils.getPref(this, Constant.EXIT_BTN_COUNT, 1) == 2) {
-                if (Utils.getPref(this, Constant.AD_TYPE_FB_GOOGLE, "") == Constant.AD_GOOGLE &&
-                    Utils.getPref(this, Constant.STATUS_ENABLE_DISABLE, "") == Constant.ENABLE
-                ) {
-                    AdUtils.showInterstitialAdsGoogle(this, object : AdsCallback {
-                        override fun startNextScreenAfterAd() {
-                            quiteData(quiteDialog)
-                        }
-
-                    })
-                } else if (Utils.getPref(
-                        this,
-                        Constant.AD_TYPE_FB_GOOGLE,
-                        ""
-                    ) == Constant.AD_FACEBOOK &&
-                    Utils.getPref(this, Constant.STATUS_ENABLE_DISABLE, "") == Constant.ENABLE
-                ) {
-                    AdUtils.showInterstitialAdsFacebook(this, object : AdsCallback {
-                        override fun startNextScreenAfterAd() {
-                            quiteData(quiteDialog)
-                        }
-
-                    })
-                } else {
-                    quiteData(quiteDialog)
-                }
-                Utils.setPref(this, Constant.EXIT_BTN_COUNT, 1)
-            } else {
-                if (adClickCount == 1) {
-                    Utils.setPref(this, Constant.EXIT_BTN_COUNT, 2)
-                }
-                quiteData(quiteDialog)
-            }
+            quiteData(quiteDialog)
         }
 
         dialogQuiteWorkoutBinding.tvComeback.setOnClickListener {
