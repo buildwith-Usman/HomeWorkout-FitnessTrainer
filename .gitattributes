@@ -1,0 +1,8 @@
+# Tell GitHub Linguist to ignore third-party vendored Java libraries
+# so the repo language stats reflect the actual Kotlin source code.
+
+MPChartLib/**                linguist-vendored=true
+horizontal-picker/**         linguist-vendored=true
+
+app/src/main/java/fitnessapp/workout/homeworkout/compactcalender/**          linguist-vendored=true
+app/src/main/java/fitnessapp/workout/homeworkout/view/stickyheadersrecyclerview/**  linguist-vendored=true
